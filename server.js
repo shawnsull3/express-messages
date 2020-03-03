@@ -20,7 +20,7 @@ app.get('/api/messages', (req,res) => {
 app.post('/api/messages', (req,res) => {
   pool.createMessage(req.body.name, req.body.message)
     .then( () => res.sendStatus(201))
-    .catch(error => console.log(error));
+    .catch(error => res.send(error));
 });
 
 
