@@ -23,19 +23,17 @@ app.post('/api/messages', (req,res) => {
     .catch(error => res.send(error));
 });
 
-
-///////all api requests below will need an addtional param on the path//////
-//get 1 message
 app.get('/api/messages/:id', (req,res) => {
-  console.log(req.params.id);
   pool.getMessage(req.params.id)
     .then(results => res.send(results))
     .catch(error => res.send(error));
 });
 
-// app.put('/api/messages/', (req,res) => {
-
-// });
+app.put('/api/messages/:id', (req,res) => {
+  pool.update(req.params.id, req.body.message)
+    .then( () => res.sendStatus(200))
+    .catch(error => res.send(error));
+});
 
 // app.delete('/api/messages/', (req,res) => {
 

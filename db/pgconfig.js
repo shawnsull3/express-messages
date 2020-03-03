@@ -17,14 +17,25 @@ function createMessage(name, newMessage) {
 }
 
 function getMessage(id) {
-  let value = [id];
-  return (pool.query('SELECT * FROM messages WHERE id = $1', value))
+  let input = [id];
+  return (pool.query('SELECT * FROM messages WHERE id = $1', input))
     .then(data => data.rows);
 };
+
+function update(id, newMessage) {
+  let inputs = [id, newMessage];
+  return pool.query('UPDATE messages SET message = $2 WHERE id = $1', inputs)
+}
+
+function deleteMessage(id) {
+  let input = [id];
+
+}
 
 module.exports = {
   pool,
   getAll,
   createMessage,
-  getMessage
+  getMessage,
+  update
 };
