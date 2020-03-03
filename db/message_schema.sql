@@ -11,8 +11,13 @@ CREATE DATABASE messages;
 \c messages;
 
 CREATE TABLE messages (
--- build your schema here
+    id serial PRIMARY KEY,
+    name text,
+    message text
 );
 
 -- Seed your data with a collection of insert statements
 -- INSERT INTO messages () VALUES ();
+
+INSERT INTO messages (name, message) VALUES ('shawn', 'the battle between Shawn and the server has begun');
+INSERT INTO messages (name, message) VALUES ('mario', 'itsa me, mario');
