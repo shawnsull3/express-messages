@@ -7,10 +7,6 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: false}));
 
 
-// app.use((req,res,next) => {
-//   res.status(404).send('That route does not exist');
-// });
-
 app.get('/api/messages', (req,res) => {
   pool.getAll()
     .then(results => res.send(results))
@@ -35,13 +31,15 @@ app.put('/api/messages/:id', (req,res) => {
     .catch(error => res.send(error));
 });
 
-// app.delete('/api/messages/', (req,res) => {
+app.delete('/api/messages/:id', (req,res) => {
+  pool.deleteMessage(req.params.id)
+    .then( () => res.sendStatus(200))
+    .catch(error => res.send(error));
+});
 
-// });
-
-
-
-
+app.use((req,res,next) => {
+  res.status(404).send('That route does not exist');
+});
 
 const port = 3000;
 

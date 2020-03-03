@@ -13,7 +13,7 @@ function getAll() {
 
 function createMessage(name, newMessage) {
   let inputs = [name, newMessage]
-  return pool.query('INSERT INTO messages (name, message) VALUES($1, $2)', inputs)
+  return pool.query('INSERT INTO messages (name, message) VALUES($1, $2)', inputs);
 }
 
 function getMessage(id) {
@@ -24,12 +24,12 @@ function getMessage(id) {
 
 function update(id, newMessage) {
   let inputs = [id, newMessage];
-  return pool.query('UPDATE messages SET message = $2 WHERE id = $1', inputs)
+  return pool.query('UPDATE messages SET message = $2 WHERE id = $1', inputs);
 }
 
 function deleteMessage(id) {
   let input = [id];
-
+  return (pool.query('DELETE FROM messages WHERE id = $1', input));
 }
 
 module.exports = {
@@ -37,5 +37,6 @@ module.exports = {
   getAll,
   createMessage,
   getMessage,
-  update
+  update,
+  deleteMessage
 };
