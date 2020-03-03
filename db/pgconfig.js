@@ -8,17 +8,16 @@ const pool = new Pool({
 
 function getAll() {
   return (pool.query('SELECT * FROM messages'))
-    .then( data => data.rows);
+    .then(data => data.rows);
 };
 
 function createMessage(name, newMessage) {
-  // let inputs = [name, newMessage]
-  // return pool.query('INSERT INTO messages (name, message) VALUES($1, $2)', inputs)
-  //   .then()
+  let inputs = [name, newMessage]
+  return pool.query('INSERT INTO messages (name, message) VALUES($1, $2)', inputs)
 }
 
 module.exports = {
   pool,
   getAll,
-  // create
+  createMessage
 };
