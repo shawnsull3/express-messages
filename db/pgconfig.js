@@ -16,8 +16,15 @@ function createMessage(name, newMessage) {
   return pool.query('INSERT INTO messages (name, message) VALUES($1, $2)', inputs)
 }
 
+function getMessage(id) {
+  let value = [id];
+  return (pool.query('SELECT * FROM messages WHERE id = $1', value))
+    .then(data => data.rows);
+};
+
 module.exports = {
   pool,
   getAll,
-  createMessage
+  createMessage,
+  getMessage
 };

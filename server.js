@@ -14,7 +14,7 @@ app.use(bodyParser.urlencoded({extended: false}));
 app.get('/api/messages', (req,res) => {
   pool.getAll()
     .then(results => res.send(results))
-    .catch(error => console.log(error));
+    .catch(error => res.send(error));
 });
 
 app.post('/api/messages', (req,res) => {
@@ -26,9 +26,12 @@ app.post('/api/messages', (req,res) => {
 
 ///////all api requests below will need an addtional param on the path//////
 //get 1 message
-// app.get('/api/messages', (req,res) => {
-
-// });
+app.get('/api/messages/:id', (req,res) => {
+  console.log(req.params.id);
+  pool.getMessage(req.params.id)
+    .then(results => res.send(results))
+    .catch(error => res.send(error));
+});
 
 // app.put('/api/messages/', (req,res) => {
 
